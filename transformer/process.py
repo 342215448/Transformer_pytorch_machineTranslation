@@ -10,10 +10,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 lang_map = {
     'zh':'Chinese',
-    'en':'English'
+    'en':'English',
+    'fr':'French'
 }
 
-# C:\Users\Administrator\Documents\GitHub\Transformer_pytorch_machineTranslation\transformer\process.py
 def create_folder_if_not_exists(folder_path):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
@@ -29,7 +29,7 @@ def create_masks(src, trg):
 
     if trg is not None:
         trg_mask = (trg != 0).unsqueeze(-2).to(device)
-        size = trg.size(1)  # get seq_len for matrix
+        size = trg.size(1) 
         np_mask = nopeak_mask(size).to(device)
         trg_mask = trg_mask & np_mask
 
@@ -51,7 +51,6 @@ class CustomDataset(Dataset):
 
     def __getitem__(self, index):
         sample = self.data[index]
-        # 在这里对数据进行必要的转换或处理，然后返回
         return sample
 class Spacy_tokenizer(object):
     def __init__(self, lang):
@@ -149,5 +148,6 @@ def create_dataloader(src_lang, tgt_lang, src_path, tgt_path, batch_size):
             })
             max_seq_len = max(len(src_list[i]), len(tgt_list[i]))
     custom_dataset = CustomDataset(raw_list)
-    dataloader = DataLoader(custom_dataset, batch_size=batch_size, collate_fn=custom_collate, num_workers=4, shuffle=True)
-    return dataloader, src_vocab_size, tgt_vocab_size, max_seq_len
+    # train_dataset, val_dataset = torch.utils.data.random_split(custom_dataset, [train_size, val_size])
+    train_dataloader = DataLoader(custom_dataset, batch_size=batch_size, collate_fn=custom_collate, num_workers=4, shuffle=True)
+    return train_dataloader, src_vocab_size, tgt_vocab_size, max_seq_len
