@@ -1,10 +1,12 @@
 import torch
 from tqdm import tqdm
-from transformer.fpn_transformer import Transformer
-from transformer.fpn_process import create_dataloader, create_masks, create_folder_if_not_exists
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.dirname('__file__')))
+from transformer.transformer import Transformer
+from transformer.process import create_dataloader, create_masks, create_folder_if_not_exists
 import torch.nn.functional as F
 import torch.optim as optim
-import os
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
