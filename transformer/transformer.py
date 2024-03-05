@@ -26,9 +26,9 @@ class PositionalEncoder(nn.Module):
         self.register_buffer('pe', pe)
 
     def forward(self, x):
-        # make embeddings relatively larger
+
         x = x * math.sqrt(self.d_model)
-        # add constant to embedding
+
         seq_len = x.size(1)
         pe = Variable(self.pe[:, :seq_len], requires_grad=False)
         pe.to(device)
@@ -82,9 +82,11 @@ class MultiHeadAttention(nn.Module):
         q = self.q_linear(q).view(bs, -1, self.h, self.d_k)
         v = self.v_linear(v).view(bs, -1, self.h, self.d_k)
 
+
         k = k.transpose(1, 2)
         q = q.transpose(1, 2)
         v = v.transpose(1, 2)
+
 
         scores = attention(q, k, v, self.d_k, mask, self.dropout)
 
@@ -97,11 +99,9 @@ class FeedForward(nn.Module):
     def __init__(self, d_model, d_ff=2048, dropout=0.1):
         super().__init__()
 
-        # d_ff默认为2048
         self.linear_1 = nn.Linear(d_model, d_ff)
         self.dropout = nn.Dropout(dropout)
         self.linear_2 = nn.Linear(d_ff, d_model)
-    def forward(self, x):
 
         x = self.linear_1(x)
         x = F.relu(x)
