@@ -55,11 +55,11 @@ class CustomDataset(Dataset):
 class Spacy_tokenizer(object):
     def __init__(self, lang):
         if lang == 'en':
-            lang = 'en_core_web_trf'
+            lang = 'en_core_web_sm'
         elif lang == 'fr':
-            lang = 'fr_dep_news_trf'
+            lang = 'fr_core_news_sm'
         elif lang == 'zh':
-            lang = 'zh_core_web_trf'
+            lang = 'zh_core_web_sm'
         else:
             print("Please use spacy download to download other language...")
         self.nlp = spacy.load(lang)

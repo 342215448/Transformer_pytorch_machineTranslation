@@ -1,1 +1,3 @@
-/__pycache__
+./transformer/__pycache__
+dict
+./weights
