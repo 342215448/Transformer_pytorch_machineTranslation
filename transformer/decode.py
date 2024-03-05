@@ -97,13 +97,13 @@ class BeamSearchDecoder:
         return self.vocab.convert_ids_to_tokens(best_seq), best_score
 
 
-if __name__ == '__main__':
-    input_sentence = torch.randint(1, 9, (1, 10))
-    english_vocab = torch.load('dict/English_dict.fpn')
-    french_vocab = torch.load('dict/French_dict.fpn')
-    model = Transformer(len(english_vocab), len(french_vocab), 512, 6, 8, 0.1, 50).to(device)
-    model.load_state_dict(torch.load('weights/21_statedict.pth'))
-    model.to(device)
-    model.eval()
-    outputs, e_outputs, log_scores = init_vars(input_sentence.to(device), model, english_vocab, french_vocab)
-    # BeamDecoder = BeamSearchDecoder(model, french_vocab)
+# if __name__ == '__main__':
+#     input_sentence = torch.randint(1, 9, (1, 10))
+#     english_vocab = torch.load('dict/English_dict.fpn')
+#     french_vocab = torch.load('dict/French_dict.fpn')
+#     model = Transformer(len(english_vocab), len(french_vocab), 512, 6, 8, 0.1, 50).to(device)
+#     model.load_state_dict(torch.load('weights/21_statedict.pth'))
+#     model.to(device)
+#     model.eval()
+#     outputs, e_outputs, log_scores = init_vars(input_sentence.to(device), model, english_vocab, french_vocab)
+#     # BeamDecoder = BeamSearchDecoder(model, french_vocab)
