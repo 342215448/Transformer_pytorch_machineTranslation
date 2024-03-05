@@ -1,7 +1,7 @@
 import torch
 import torch.nn.functional as F
-from fpn_transformer import Transformer
-from fpn_process import nopeak_mask, Spacy_tokenizer
+from transformer import Transformer
+from process import nopeak_mask, Spacy_tokenizer
 import math
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
