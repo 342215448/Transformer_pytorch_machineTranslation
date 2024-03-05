@@ -1,7 +1,7 @@
 import torch
 from tqdm import tqdm
-from transformer.fpn_transformer import Transformer
-from transformer.fpn_process import create_dataloader, create_masks, create_folder_if_not_exists
+from transformer.transformer import Transformer
+from transformer.process import create_dataloader, create_masks, create_folder_if_not_exists
 import torch.nn.functional as F
 import torch.optim as optim
 import os
