@@ -1,5 +1,8 @@
 import torch
 from tqdm import tqdm
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.dirname('__file__')))
 from transformer.transformer import Transformer
 from transformer.process import create_dataloader, create_masks, create_folder_if_not_exists
 import torch.nn.functional as F
